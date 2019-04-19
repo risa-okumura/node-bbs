@@ -1,17 +1,14 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Title from './Title/Title.js';
-import List from './List/List.js';
-import Form from './Form/Form.js';
-
+import ArticleList from './Article/List.js';
 
 class App extends Component {
     render(){
         return (
         <div>
-            <Title />
-            <Form />
-            <List />
+            <Title title="掲示板アプリ" />
+            <ArticleList />
         </div>
         )
     }

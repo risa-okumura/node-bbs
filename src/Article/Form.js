@@ -6,22 +6,25 @@ export default class Form extends Component {
         super(props);
         this.state = {
             name : "",
-            content : ""
+            content : "",
         };
+        //bindしないとフォームに入力できなくなる.
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
+    //フォーム入力されたらstateを変更する.
     handleChange(event){
         this.setState({
             [event.target.name]: event.target.value
         })
     }
+    //「投稿する」ボタンが押されたら、DBに登録し、表示内容を更新する.
     handleSubmit(event){
         event.preventDefault();
         axios
             .post('/registerArticle',{
-                name : this.state.name,
+                name: this.state.name,
                 content: this.state.content
             })
             .then(response =>{
@@ -30,6 +33,8 @@ export default class Form extends Component {
             .catch(error =>{
                 console.log(error);
             });
+        //Listコンポーネントから受け取った更新メソッドを呼び出す.
+        this.props.reloadArticles();
     }
 
     render(){

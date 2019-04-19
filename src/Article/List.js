@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import Form from './Form.js';
 
 //記事情報をリストで表示するコンポーネント.
 export default class List extends Component {
@@ -9,7 +10,6 @@ export default class List extends Component {
             articles: []
         }
     }
-
     //apiから記事情報を取得する.
     getArticles (){
         axios
@@ -22,17 +22,21 @@ export default class List extends Component {
                 //スプレッド演算子で全オブジェクトリテラルを配列にセット.
                 articles: [...data]
             });
-        });
+        })
+        .catch(error =>{
+            console.log(error);
+        })
     }
-    //
+
+    //Formコンポーネントに渡すための更新メソッド.
+    _reloadArticles(){
+        this.getArticles();
+    }
+
+    //初期表示.
     componentDidMount(){
         this.getArticles();
     };
-    
-    // componentDidUpdate(){
-    //     //ここで再度読み込み？
-    //     this.getArticles();
-    // };
 
     render(){
         //Arrayオブジェクトのmapメソッドを使用する.
@@ -44,6 +48,7 @@ export default class List extends Component {
         
         return (
             <div>
+            <Form reloadArticles={this._reloadArticles.bind(this)}/>
             <ul>
                 {articles}
             </ul>
