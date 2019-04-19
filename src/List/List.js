@@ -24,10 +24,8 @@ export default class List extends Component {
             });
         });
     }
-
-    
-    //本当は使ってはいけない
-    componentWillMount(){
+    //
+    componentDidMount(){
         this.getArticles();
     };
     

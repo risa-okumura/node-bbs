@@ -2,11 +2,13 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     //ソースファイル
-    entry: path.join(__dirname,'/src/index.js'),
+    entry: {
+        app: path.join(__dirname,'/src/index.js'),
+    },
     //出力ディレクトリと出力ファイル名の設定.
     output: {
         path: path.join(__dirname,'/public'),
-        filename: 'app.js'
+        filename: '[name].js'
     },
     devtool: 'inline-source-map',
     module: {
